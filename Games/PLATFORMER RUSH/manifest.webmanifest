@@ -1,0 +1,12 @@
+{
+  "name": "PLATFORMER RUSH",
+  "short_name": "PLATFORMER RUSH",
+  "id": "com.example.platformer",
+  "description": "This is a Platformer made with GDevelop.",
+  "orientation": "landscape",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "black",
+  "categories": ["games", "entertainment"],
+  "icons": []
+}
