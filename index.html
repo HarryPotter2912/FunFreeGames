@@ -3,50 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fun Free Games</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f0f0f0;
+  <title>Play Free Online Games Instantly | FunFreeGames</title>
+  <meta name="description" content="free Games" />
+  <meta name="keywords" content="free games, online games, browser games, play now, no download" />
+  <meta name="author" content="FunFreeGames" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- SEO Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FunFreeGames",
+    "url": "https://funfreegames.netlify.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://funfreegames.netlify.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .game-card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    iframe {
-      width: 100%;
-      height: 320px;
-      border: none;
-      border-radius: 8px;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
+  }
+  </script>
 </head>
 <body>
   <h1>🎮 Fun Free Games</h1>
@@ -54,13 +30,11 @@
     <div class="game-card">
       <iframe src="Games/hextris-gh-pages/index.html" allowfullscreen></iframe>
       <button class="fullscreen-btn" onclick="goFullscreen(this)">⛶</button>
-
     </div>
-    <!-- Add more game cards below -->
-    <!-- Example:
+    <!-- Add more games like this:
     <div class="game-card">
       <iframe src="Games/another-game/index.html" allowfullscreen></iframe>
-      <button onclick="goFullscreen(this)">Fullscreen</button>
+      <button class="fullscreen-btn" onclick="goFullscreen(this)">⛶</button>
     </div>
     -->
   </div>
@@ -75,10 +49,4 @@
       } else if (iframe.mozRequestFullScreen) {
         iframe.mozRequestFullScreen();
       } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
-      }
-    }
-  </script>
-</body>
-</html>
-
+        iframe.msRequestFullscreen
