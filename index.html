@@ -6,7 +6,7 @@
   <title>Fun Free Games</title>
   <meta name="description" content="Play free HTML5 games instantly. No downloads, no logins." />
   <meta name="keywords" content="free games, HTML5, online games, instant play" />
-  <meta name="author" content="HsrryPotter8" />
+  <meta name="author" content="Devasya" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,6 +31,17 @@
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       position: relative;
+    }
+    .thumb {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .thumb:hover {
+      transform: scale(1.03);
     }
     iframe {
       width: 100%;
@@ -63,14 +74,20 @@
 
   <div class="grid">
     <div class="game-card">
+      <a href="Games/hextris-gh-pages/index.html" target="_blank">
+        <img src="thumbnails/hextris.png" alt="Hextris thumbnail" class="thumb" />
+      </a>
       <h3>Hextris</h3>
       <iframe src="Games/hextris-gh-pages/index.html" allowfullscreen></iframe>
       <button class="fullscreen-btn" onclick="goFullscreen(this)">⛶</button>
     </div>
 
     <div class="game-card">
-      <h3>PLATFORMER RUSH</h3>
-      <iframe src="Games/PLATFORMER RUSH/index.html" allowfullscreen></iframe>
+      <a href="Games/2048/index.html" target="_blank">
+        <img src="thumbnails/2048.png" alt="2048 thumbnail" class="thumb" />
+      </a>
+      <h3>2048</h3>
+      <iframe src="Games/2048/index.html" allowfullscreen></iframe>
       <button class="fullscreen-btn" onclick="goFullscreen(this)">⛶</button>
     </div>
   </div>
