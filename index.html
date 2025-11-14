@@ -2,40 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fun Free Games</title>
-  <meta name="description" content="Play free HTML5 games instantly. No downloads, no logins." />
-  <meta name="keywords" content="free games, HTML5, online games, instant play" />
-  <meta name="author" content="Devasya" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: white;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px;
+    }
+    .game-card {
+      width: 200px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .game-card img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .game-card h3 {
+      margin-top: 10px;
+    }
+
+    /* Game screen */
+    .game-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+    }
+    .game-screen.active {
+      display: flex;
+    }
+    .game-screen h1 {
+      margin-bottom: 10px;
+    }
+    .game-screen p {
+      margin-bottom: 20px;
+      color: #555;
+    }
+    iframe {
+      width: 90%;
+      max-width: 900px;
+      height: 600px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .fullscreen-btn, .back-btn {
+      margin-top: 20px;
+      font-size: 18px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .fullscreen-btn:hover, .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Fun Free Games</h1>
-    <p>Play instantly. No downloads. No logins.</p>
-  </header>
 
-  <div class="grid">
-    <div class="game-card" onclick="showModal('hextris')">
-      <img src="Thumbnails/hextris.png" alt="Hextris thumbnail" class="thumb" />
-      <h3>Hextris</h3>
-    </div>
+  <!-- Launcher -->
+  <div id="launcher">
+    <header>
+      <h1>Fun Free Games</h1>
+      <p>Play instantly. No downloads. No logins.</p>
+    </header>
 
-    <div class="game-card" onclick="showModal('2048')">
-      <img src="Thumbnails/2048.png" alt="2048 thumbnail" class="thumb" />
-      <h3>2048</h3>
+    <div class="grid">
+      <div class="game-card" onclick="launchGame('hextris')">
+        <img src="Thumbnails/hextris.png" alt="Hextris thumbnail" />
+        <h3>Hextris</h3>
+      </div>
+
+      <div class="game-card" onclick="launchGame('platformer')">
+        <img src="Thumbnails/2048.png" alt="Platformer Rush thumbnail" />
+        <h3>Platformer Rush</h3>
+      </div>
     </div>
   </div>
 
-  <!-- Game Detail Modal -->
-  <div id="game-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">×</span>
-      <h2 id="modal-title">Game Title</h2>
-      <p id="modal-description">Game description goes here.</p>
-      <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
-      <button class="fullscreen-btn" onclick="goFullscreen()">⛶</button>
-    </div>
+  <!-- Game Screen -->
+  <div id="game-screen" class="game-screen">
+    <h1 id="game-title">Game Title</h1>
+    <p id="game-description">Game description goes here.</p>
+    <iframe id="game-frame" src="" allowfullscreen></iframe>
+    <button class="fullscreen-btn" onclick="goFullscreen()">⛶ Fullscreen</button>
+    <button class="back-btn" onclick="goBack()">← Back to Launcher</button>
   </div>
 
   <script>
@@ -45,28 +116,30 @@
         description: "Rotate the hexagon and match colors in this fast-paced puzzle game.",
         url: "Games/hextris-gh-pages/index.html"
       },
-      "2048": {
-        title: "2048",
-        description: "Join the numbers and reach 2048 in this addictive sliding puzzle.",
-        url: "Games/2048/index.html"
+      platformer: {
+        title: "Platformer Rush",
+        description: "Dash, jump, and dodge through fast-paced levels in this action-packed platformer.",
+        url: "Games/platformer/index.html"
       }
     };
 
-    function showModal(gameKey) {
-      const game = games[gameKey];
-      document.getElementById("modal-title").textContent = game.title;
-      document.getElementById("modal-description").textContent = game.description;
-      document.getElementById("modal-iframe").src = game.url;
-      document.getElementById("game-modal").classList.remove("hidden");
+    function launchGame(key) {
+      const game = games[key];
+      document.getElementById("game-title").textContent = game.title;
+      document.getElementById("game-description").textContent = game.description;
+      document.getElementById("game-frame").src = game.url;
+      document.getElementById("launcher").style.display = "none";
+      document.getElementById("game-screen").classList.add("active");
     }
 
-    function closeModal() {
-      document.getElementById("game-modal").classList.add("hidden");
-      document.getElementById("modal-iframe").src = "";
+    function goBack() {
+      document.getElementById("game-frame").src = "";
+      document.getElementById("game-screen").classList.remove("active");
+      document.getElementById("launcher").style.display = "block";
     }
 
     function goFullscreen() {
-      const iframe = document.getElementById("modal-iframe");
+      const iframe = document.getElementById("game-frame");
       if (iframe.requestFullscreen) {
         iframe.requestFullscreen();
       } else if (iframe.webkitRequestFullscreen) {
