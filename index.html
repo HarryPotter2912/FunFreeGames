@@ -147,82 +147,74 @@
     <button class="back-btn" onclick="goBack()">← Back to Launcher</button>
   </div>
 
-  <!-- ✅ Script moved to bottom so buttons work -->
+  <!-- Script placed at bottom for proper DOM access -->
   <script>
-    const games = {
-      hextris: {
-        title: "Hextris",
-        description: "Rotate the hexagon and match colors in this fast-paced puzzle game.",
-        url: "Games/hextris-gh-pages/index.html"
-      },
-      platformer: {
-        title: "Platformer Rush",
-        description: "Dash, jump, and dodge through fast-paced levels in this action-packed platformer.",
-        url: "Games/PLATFORMER RUSH/index.html"
-      },
-      normal: {
-        title: "Normal Game",
-        description: "A simple, classic game experience to enjoy anytime.",
-        url: "Games/normal/index.html"
+    document.addEventListener("DOMContentLoaded", () => {
+      const games = {
+        hextris: {
+          title: "Hextris",
+          description: "Rotate the hexagon and match colors in this fast-paced puzzle game.",
+          url: "Games/hextris-gh-pages/index.html"
+        },
+        platformer: {
+          title: "Platformer Rush",
+          description: "Dash, jump, and dodge through fast-paced levels in this action-packed platformer.",
+          url: "Games/PLATFORMER RUSH/index.html"
+        },
+        normal: {
+          title: "Normal Game",
+          description: "A simple, classic game experience to enjoy anytime.",
+          url: "Games/normal/index.html"
+        }
+      };
+
+      const iframe = document.getElementById("game-frame");
+      const gameScreen = document.getElementById("game-screen");
+      const btnFullscreen = document.getElementById("btn-fullscreen");
+      const btnExitFullscreen = document.getElementById("btn-exit-fullscreen");
+
+      function launchGame(key) {
+        const game = games[key];
+        document.getElementById("game-title").textContent = game.title;
+        document.getElementById("game-description").textContent = game.description;
+        iframe.src = game.url;
+        document.getElementById("launcher").style.display = "none";
+        gameScreen.classList.add("active");
       }
-    };
 
-    function launchGame(key) {
-      const game = games[key];
-      document.getElementById("game-title").textContent = game.title;
-      document.getElementById("game-description").textContent = game.description;
-      document.getElementById("game-frame").src = game.url;
-      document.getElementById("launcher").style.display = "none";
-      document.getElementById("game-screen").classList.add("active");
-    }
-
-    function goBack() {
-      exitFullscreenIfNeeded();
-      document.getElementById("game-frame").src = "";
-      document.getElementById("game-screen").classList.remove("active");
-      document.getElementById("launcher").style.display = "block";
-    }
-
-    const iframe = document.getElementById("game-frame");
-    const gameScreen = document.getElementById("game-screen");
-    const btnFullscreen = document.getElementById("btn-fullscreen");
-    const btnExitFullscreen = document.getElementById("btn-exit-fullscreen");
-
-    btnFullscreen.addEventListener("click", () => {
-      if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-      } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-      } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
+      function goBack() {
+        exitFullscreenIfNeeded();
+        iframe.src = "";
+        gameScreen.classList.remove("active");
+        document.getElementById("launcher").style.display = "block";
       }
-    });
 
-    btnExitFullscreen.addEventListener("click", exitFullscreenIfNeeded);
+      btnFullscreen.addEventListener("click", () => {
+        if (iframe.requestFullscreen) {
+          iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) {
+          iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) {
+          iframe.msRequestFullscreen();
+        }
+      });
 
-    function exitFullscreenIfNeeded() {
-      if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-        if (document.exitFullscreen) {
+      btnExitFullscreen.addEventListener("click", exitFullscreenIfNeeded);
+
+      function exitFullscreenIfNeeded() {
+        if (document.fullscreenElement) {
           document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
+        } else if (document.webkitFullscreenElement) {
           document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
+        } else if (document.msFullscreenElement) {
           document.msExitFullscreen();
         }
       }
-    }
 
-    function handleFsChange() {
-      const isFs =
-        !!document.fullscreenElement ||
-        !!document.webkitFullscreenElement ||
-        !!document.msFullscreenElement;
-      gameScreen.classList.toggle("fullscreen-active", isFs);
-    }
-
-    document.addEventListener("fullscreenchange", handleFsChange);
-    document.addEventListener("webkitfullscreenchange", handleFsChange);
-    document.addEventListener("msfullscreenchange", handleFsChange);
+      document.addEventListener("fullscreenchange", () => {
+        const isFullscreen = !!document.fullscreenElement;
+        gameScreen.classList.toggle("fullscreen-active", isFullscreen);
+      });
+    });
   </script>
 </body>
-</html>
