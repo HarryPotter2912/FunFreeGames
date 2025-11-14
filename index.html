@@ -16,19 +16,65 @@
   </header>
 
   <div class="grid">
-    <div class="game-card">
-      <a href="Games/hextris-gh-pages/index.html" target="_blank">
-        <img src="Thumbnails/hextris.png" alt="Hextris thumbnail" class="thumb" />
-      </a>
+    <div class="game-card" onclick="showModal('hextris')">
+      <img src="Thumbnails/hextris.png" alt="Hextris thumbnail" class="thumb" />
       <h3>Hextris</h3>
     </div>
 
-    <div class="game-card">
-      <a href="Games/PLATFORMER RUSH/index.html" target="_blank">
-        <img src="Thumbnails/2048.png" alt="2048 thumbnail" class="thumb" />
-      </a>
-      <h3>PLATFORMER RUSH</h3>
+    <div class="game-card" onclick="showModal('2048')">
+      <img src="Thumbnails/2048.png" alt="2048 thumbnail" class="thumb" />
+      <h3>2048</h3>
     </div>
   </div>
+
+  <!-- Game Detail Modal -->
+  <div id="game-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h2 id="modal-title">Game Title</h2>
+      <p id="modal-description">Game description goes here.</p>
+      <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+      <button class="fullscreen-btn" onclick="goFullscreen()">⛶</button>
+    </div>
+  </div>
+
+  <script>
+    const games = {
+      hextris: {
+        title: "Hextris",
+        description: "Rotate the hexagon and match colors in this fast-paced puzzle game.",
+        url: "Games/hextris-gh-pages/index.html"
+      },
+      "2048": {
+        title: "2048",
+        description: "Join the numbers and reach 2048 in this addictive sliding puzzle.",
+        url: "Games/2048/index.html"
+      }
+    };
+
+    function showModal(gameKey) {
+      const game = games[gameKey];
+      document.getElementById("modal-title").textContent = game.title;
+      document.getElementById("modal-description").textContent = game.description;
+      document.getElementById("modal-iframe").src = game.url;
+      document.getElementById("game-modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("game-modal").classList.add("hidden");
+      document.getElementById("modal-iframe").src = "";
+    }
+
+    function goFullscreen() {
+      const iframe = document.getElementById("modal-iframe");
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+  </script>
 </body>
 </html>
