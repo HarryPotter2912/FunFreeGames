@@ -147,7 +147,7 @@
     <button class="back-btn" onclick="goBack()">← Back to Launcher</button>
   </div>
 
-  <!-- Script placed at bottom for proper DOM access -->
+  <!-- Script at bottom for proper DOM access -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const games = {
@@ -215,6 +215,10 @@
         const isFullscreen = !!document.fullscreenElement;
         gameScreen.classList.toggle("fullscreen-active", isFullscreen);
       });
+
+      // Expose launchGame globally
+      window.launchGame = launchGame;
     });
   </script>
 </body>
+</html>
