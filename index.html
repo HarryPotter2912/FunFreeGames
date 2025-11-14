@@ -4,19 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fun Free Games</title>
-  <link rel="stylesheet" href="styles.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
+    /* Reset and base styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+
+    /* Header */
     header {
       text-align: center;
-      padding: 20px;
+      padding: 30px 20px;
       background: #222;
       color: white;
     }
+    header h1 { font-size: 36px; margin-bottom: 10px; }
+    header p { font-size: 18px; color: #ccc; }
+
+    /* Launcher grid */
     .grid {
       display: flex;
       flex-wrap: wrap;
@@ -28,33 +31,26 @@
       width: 200px;
       cursor: pointer;
       text-align: center;
+      transition: transform 0.2s;
     }
+    .game-card:hover { transform: scale(1.05); }
     .game-card img {
       width: 100%;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    .game-card h3 {
-      margin-top: 10px;
-    }
+    .game-card h3 { margin-top: 10px; font-size: 18px; }
 
-    /* Game screen */
+    /* Game detail screen */
     .game-screen {
       display: none;
       flex-direction: column;
       align-items: center;
       padding: 30px 20px;
     }
-    .game-screen.active {
-      display: flex;
-    }
-    .game-screen h1 {
-      margin-bottom: 10px;
-    }
-    .game-screen p {
-      margin-bottom: 20px;
-      color: #555;
-    }
+    .game-screen.active { display: flex; }
+    .game-screen h1 { font-size: 32px; margin-bottom: 10px; }
+    .game-screen p { font-size: 18px; margin-bottom: 20px; color: #555; }
     iframe {
       width: 90%;
       max-width: 900px;
@@ -63,6 +59,8 @@
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
+
+    /* Buttons */
     .fullscreen-btn, .back-btn {
       margin-top: 20px;
       font-size: 18px;
@@ -74,9 +72,7 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .fullscreen-btn:hover, .back-btn:hover {
-      background: #0056b3;
-    }
+    .fullscreen-btn:hover, .back-btn:hover { background: #0056b3; }
   </style>
 </head>
 <body>
@@ -97,6 +93,11 @@
       <div class="game-card" onclick="launchGame('platformer')">
         <img src="Thumbnails/2048.png" alt="Platformer Rush thumbnail" />
         <h3>Platformer Rush</h3>
+      </div>
+
+      <div class="game-card" onclick="launchGame('normal')">
+        <img src="Thumbnails/normal.png" alt="Normal Game thumbnail" />
+        <h3>Normal Game</h3>
       </div>
     </div>
   </div>
@@ -120,7 +121,12 @@
       platformer: {
         title: "Platformer Rush",
         description: "Dash, jump, and dodge through fast-paced levels in this action-packed platformer.",
-        url: "Games/PLATFORMER RUSH/index.html"
+        url: "Games/PLATFORMER RUSH/index.html" // ✅ matches your folder name
+      },
+      normal: {
+        title: "Normal Game",
+        description: "A simple, classic game experience to enjoy anytime.",
+        url: "Games/normal/index.html"
       }
     };
 
