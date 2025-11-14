@@ -216,9 +216,9 @@
         gameScreen.classList.toggle("fullscreen-active", isFullscreen);
       });
 
-      // Expose launchGame globally
+      // ✅ Expose functions globally for onclick
       window.launchGame = launchGame;
+      window.goBack = goBack;
     });
   </script>
 </body>
-</html>
